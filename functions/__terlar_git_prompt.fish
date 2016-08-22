@@ -12,7 +12,7 @@ function __terlar_git_prompt --description 'Write out the git prompt'
     set_color $fish_color_git_clean
     echo -n $branch'✓'
     set_color normal
-		echo -n '] '
+    echo -n '] '
     return
   end
 
@@ -54,5 +54,5 @@ function __terlar_git_prompt --description 'Write out the git prompt'
   end
 
   set_color normal
-	echo '] '
+  echo '] '
 end
