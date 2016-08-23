@@ -1,6 +1,6 @@
 set -g fish_color_git_clean green
-set -g fish_color_git_staged yellow
-set -g fish_color_git_dirty red
+set -g fish_color_git_staged blue
+set -g fish_color_git_dirty yellow
 
 set -g fish_color_git_added green
 set -g fish_color_git_modified blue
