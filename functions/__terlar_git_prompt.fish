@@ -42,7 +42,7 @@ function __terlar_git_prompt --description 'Write out the git prompt'
   set -l staged
 
   # Check if remote HEAD matches local HEAD
-  if test (git rev-parse HEAD ^/dev/null) != (git rev-parse '@{u}' ^/dev/null)
+  if test (git rev-parse HEAD ^/dev/null) != (git rev-parse '@{u}' ^/dev/null) ^/dev/null
     set gs $gs desync
   end
 
