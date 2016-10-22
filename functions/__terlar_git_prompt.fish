@@ -10,6 +10,7 @@ set -g fish_color_git_deleted red
 set -g fish_color_git_untracked yellow
 set -g fish_color_git_unmerged red
 set -g fish_color_git_desync green
+set -g fish_color_git_stash cyan
 
 set -g fish_prompt_git_status_added '🞥'
 set -g fish_prompt_git_status_modified '🟊'
@@ -19,8 +20,9 @@ set -g fish_prompt_git_status_deleted '❌'
 set -g fish_prompt_git_status_untracked '?'
 set -g fish_prompt_git_status_unmerged '!'
 set -g fish_prompt_git_status_desync '⟲'
+set -g fish_prompt_git_status_stash '§'
 
-set -g fish_prompt_git_status_order added modified renamed copied deleted untracked unmerged desync
+set -g fish_prompt_git_status_order added modified renamed copied deleted untracked unmerged desync stash
 
 function __terlar_git_prompt --description 'Write out the git prompt'
   # If git isn't installed, there's nothing we can do
@@ -44,6 +46,11 @@ function __terlar_git_prompt --description 'Write out the git prompt'
   # Check if remote HEAD matches local HEAD
   if test (git rev-parse HEAD ^/dev/null) != (git rev-parse '@{u}' ^/dev/null) ^/dev/null
     set gs $gs desync
+  end
+
+  # Check if and stashed changes
+  if count (git stash list) > /dev/null
+    set gs $gs stash
   end
 
   for i in $index
