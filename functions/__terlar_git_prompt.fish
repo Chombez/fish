@@ -31,25 +31,25 @@ function __terlar_git_prompt --description 'Write out the git prompt'
     return 1
   end
 
-  set -l branch (git rev-parse --abbrev-ref HEAD ^/dev/null)
+  set -l branch (git rev-parse --abbrev-ref HEAD 2>/dev/null)
   if test -z $branch
     return
   end
 
   echo -n '['
 
-  set -l index (git status --porcelain ^/dev/null|cut -c 1-2|sort -u)
+  set -l index (git --no-optional-locks status --porcelain 2>/dev/null|cut -c 1-2|sort -u)
 
   set -l gs
   set -l staged
 
   # Check if remote HEAD matches local HEAD
-  if test (git rev-parse HEAD ^/dev/null) != (git rev-parse '@{u}' ^/dev/null) ^/dev/null
+  if test (git rev-parse HEAD 2>/dev/null) != (git rev-parse '@{u}' 2>/dev/null) 2>/dev/null
     set gs $gs desync
   end
 
   # Check if and stashed changes
-  if count (git stash list) > /dev/null
+  if count (git stash list 2>/dev/null) > /dev/null
     set gs $gs stash
   end
 
